@@ -55,7 +55,7 @@ class Login extends BaseController
                     "nomorTelepon"  => $nomorTelepon,
                 ); 
                 $token = JWT::encode($payload, $key, 'HS256');
-                $response= [
+                $response []= [
                     'status'    => 200,
                     'messages'  => "Login Berhasil",
                     'data'      => [
