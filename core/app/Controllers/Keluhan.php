@@ -44,11 +44,7 @@ class Keluhan extends BaseController
         $nama              = $this->request->getVar('nama');
         $keluhan           = $this->request->getVar('keluhan');
         $gambar1           = $this->request->getFile('gambar1');
-        $gambar2           = $this->request->getFile('gambar2');
-        $gambar3           = $this->request->getFile('gambar3');
         $pathGambar1       = "keluhan_".rand(0,9999).".jpg";
-        $pathGambar2       = "keluhan_".rand(0,9999).".jpg";
-        $pathGambar3       = "keluhan_".rand(0,9999).".jpg";
         $cekStatusKeluhan  = $modelData->cekStatusKeluhan($nomorTelepon);
         $statusPengguna    = $modelData->cekNomorTelepon($nomorTelepon);
         if($statusPengguna == null){
@@ -82,15 +78,11 @@ class Keluhan extends BaseController
             'nomorTeleponPengguna' => $nomorTelepon, 
             'keluhan'              => $keluhan,
             'gambar1'              => $pathGambar1,
-            'gambar2'              => $pathGambar2,
-            'gambar3'              => $pathGambar3,
             'respon'               => "kosong",
             'status'               => 0
         ];
         $modelKeluhan->insert($data);
         $gambar1->move('keluhan/',$pathGambar1);
-        $gambar2->move('keluhan/',$pathGambar2);
-        $gambar3->move('keluhan/',$pathGambar3);
         $dataLog = [
             'nomorTelepon'  => "pengguna",
             'waktu'         => date('Y-m-d H:i:s'),
