@@ -24,6 +24,16 @@ class Model_data extends Model
         $db      = \Config\Database::connect();
         $builder = $db->table('tbl_permohonan');
         $builder->select('*');
+        $builder->join('tbl_pengguna', 'tbl_pengguna.nomorTelepon = tbl_permohonan.nomorTeleponPengguna');
+        return $builder->get()->getResultArray();
+    }
+    public function getPermohonanByNomorTelepon($nomorTelepon)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('tbl_permohonan');
+        $builder->select('*');
+        $builder->where('nomorTeleponPengguna',$nomorTelepon);
+        $builder->join('tbl_pengguna', 'tbl_pengguna.nomorTelepon = tbl_permohonan.nomorTeleponPengguna');
         return $builder->get()->getResultArray();
     }
     public function getPenggunaDetailByNomorTelepon($nomorTelepon)

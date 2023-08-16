@@ -51,6 +51,7 @@ $routes->group("api", function ($routes) {
     $routes->put("ValidasiPermohonan/(:any)", "Permohonan::validasiPermohonan/$1", ['filter' => 'authFilter']);
     $routes->get("TampilPermohonan", "Permohonan::index", ['filter' => 'authFilter']);
     $routes->get("TampilDetailPermohonan/(:any)", "Permohonan::show/$1", ['filter' => 'authFilter']);
+    $routes->get("TampilDetailPermohonanByNomorTelepon/(:any)", "Permohonan::tampilByNomorTelepon/$1", ['filter' => 'authFilter']);
     $routes->delete("HapusPermohonan/(:any)", "Permohonan::delete/$1", ['filter' => 'authFilter']);
     // Manajemen Notifikasi
     $routes->get("TampilNotifikasi", "Notifikasi::index", ['filter' => 'authFilter']);

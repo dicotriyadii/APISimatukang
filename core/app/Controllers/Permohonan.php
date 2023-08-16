@@ -15,7 +15,7 @@ class Permohonan extends BaseController
     {           
         $modelData  = new Model_data();
         $data = $modelData->getPermohonan();
-        $response= [
+        $response[]= [
             'status'    => 200,
             'messages'  => "Berhasil !!",
             'data'      => $data
@@ -26,6 +26,17 @@ class Permohonan extends BaseController
     {           
         $modelData  = new Model_data();
         $data = $modelData->getPermohonanById($id);
+        $response= [
+            'status'    => 200,
+            'messages'  => "Berhasil !!",
+            'data'      => $data
+        ];  
+        return $this->respond($response,200);   
+    }
+    public function tampilByNomorTelepon($nomorTelepon=null)
+    {           
+        $modelData  = new Model_data();
+        $data = $modelData->getPermohonanByNomorTelepon($nomorTelepon);
         $response= [
             'status'    => 200,
             'messages'  => "Berhasil !!",
@@ -49,8 +60,6 @@ class Permohonan extends BaseController
         $gambar2                = $this->request->getFile('gambar2');
         $gambar3                = $this->request->getFile('gambar3');
         $pathGambar1            = "keluhan_".rand(0,9999).".jpg";
-        $pathGambar2            = "keluhan_".rand(0,9999).".jpg";
-        $pathGambar3            = "keluhan_".rand(0,9999).".jpg";
         $cekStatusPermohonan    = $modelData->cekStatusPermohonan($nomorTeleponPengguna);
         if($cekStatusPermohonan != null){
             $dataLog = [
@@ -74,13 +83,9 @@ class Permohonan extends BaseController
             'alamat'                => $alamat,
             'status'                => 0,
             'gambar1'               => $pathGambar1,
-            'gambar2'               => $pathGambar2,
-            'gambar3'               => $pathGambar3
         ];
         $permohonan->insert($data);
         $gambar1->move('permohonan/',$pathGambar1);
-        $gambar2->move('permohonan/',$pathGambar2);
-        $gambar3->move('permohonan/',$pathGambar3);
         // Proses Pembuatan Pembayaran 
         $cekStatusPermohonan    = $modelData->cekStatusPermohonan($nomorTeleponPengguna);
         $cekBiaya               = $modelData->getDetailMasterPermohonan($jenisPermohonan);

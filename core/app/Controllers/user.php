@@ -51,7 +51,7 @@ class User extends BaseController
                 'keterangan'    => "Tidak bisa melakukan penambahan user dikarenakan nomor telepon sudah tersedia"
             ];    
             $log->insert($dataLog);
-            $response = [
+            $response[] = [
                 'status'    => 400,
                 'messages'  => "Mohon Maaf, nomor telepon sudah tersedia",
             ];  
@@ -70,7 +70,7 @@ class User extends BaseController
             'keterangan'    => "Melakukan pendaftaran user"
         ];
         $log->insert($dataLog);
-        $response= [
+        $response[]= [
             'status'    => 200,
             'messages'  => "Berhasil melakukan pendaftaran",
             'data'      => $data
